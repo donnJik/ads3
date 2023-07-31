@@ -32,6 +32,7 @@ public class BST <K extends Comparable<K>, V>{
         }else {
             current.val = val;
         }
+        current.size=1+size(current.left)+size(current.right);
         return current;
     }
     public void inOrder(){
@@ -78,6 +79,7 @@ public class BST <K extends Comparable<K>, V>{
             current.right=deleteMin(current.right);
 
         }
+        current.size=1+size(current.right)+size(current.left);
         return current;
     }
     private Node findMin(Node node){
@@ -96,6 +98,9 @@ public class BST <K extends Comparable<K>, V>{
 
     public Iterable<K> iterator(){
         return null;
+    }
+    private int size(Node node){
+        return node==null ? 0 : node.size;
     }
 
 }

@@ -1,5 +1,10 @@
+import java.util.function.BinaryOperator;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        BST bst=new BST();
+        bst.put(0,1);
+        bst.put(0,1);bst.put(0,1);bst.put(0,1);bst.put(0,1);
+        bst.inOrder();
     }
 }

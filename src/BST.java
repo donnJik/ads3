@@ -23,18 +23,23 @@ public class BST <K extends Comparable<K>, V>{
         }
         int cmt= key.compareTo(current.key);
         if(cmt<0){
-            put(current.left, key,val);
+            current.left=put(current.left, key,val);
         }
         else if(cmt>0){
-            put(current.right, key, val);
+            current.right=put(current.right, key, val);
+        }else {
+            current.val = val;
         }
         return current;
     }
-    private void inOrder(Node node) {
-        if (node != null) {
-            inOrder(node.left);
-            System.out.print(node.val + " ");
-            inOrder(node.right);
+    public void inOrder(){
+        inOrder(root);//что это означает?
+    }
+    private void inOrder(Node current) {
+        if (current != null) {
+            inOrder(current.left);
+            System.out.print(current.val + " ");
+            inOrder(current.right);
         }
     }
     public V get(K key){

@@ -102,5 +102,8 @@ public class BST <K extends Comparable<K>, V>{
     private int size(Node node){
         return node==null ? 0 : node.size;
     }
+    public int size(){
+        return size(root);
+    }
 
 }

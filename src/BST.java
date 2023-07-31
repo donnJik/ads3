@@ -21,7 +21,21 @@ public class BST <K extends Comparable<K>, V>{
         if(current==null){
             return new Node(key, val);
         }
-        return null;
+        int cmt= key.compareTo(current.key);
+        if(cmt<0){
+            put(current.left, key,val);
+        }
+        else if(cmt>0){
+            put(current.right, key, val);
+        }
+        return current;
+    }
+    private void inOrder(Node node) {
+        if (node != null) {
+            inOrder(node.left);
+            System.out.print(node.val + " ");
+            inOrder(node.right);
+        }
     }
     public V get(K key){
         return null;

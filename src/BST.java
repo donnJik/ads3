@@ -1,4 +1,9 @@
-public class BST <K extends Comparable<K>, V>{
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Iterator;
+public class BST <K extends Comparable<K>, V> implements Iterable<Map.Entry<K, V>> {
     private Node root;
     private class Node{
         private K key;
@@ -45,9 +50,24 @@ public class BST <K extends Comparable<K>, V>{
             inOrder(current.right);
         }
     }
-    public V get(K key){
-        return null;
+    public V get(K key) {
+        Node node = find(root, key);
+        return node != null ? node.val : null;
     }
+
+    private Node find(Node current, K key) {
+        if (current == null || current.key.equals(key)) {
+            return current;
+        }
+
+        int cmp = key.compareTo(current.key);
+        if (cmp < 0) {
+            return find(current.left, key);
+        } else {
+            return find(current.right, key);
+        }
+    }
+
     public void delete(K key) {
         root = delete(root, key);
     }
@@ -96,9 +116,6 @@ public class BST <K extends Comparable<K>, V>{
         return node;
     }
 
-    public Iterable<K> iterator(){
-        return null;
-    }
     private int size(Node node){
         return node==null ? 0 : node.size;
     }
@@ -106,4 +123,19 @@ public class BST <K extends Comparable<K>, V>{
         return size(root);
     }
 
+    public Iterable<Map.Entry<K, V>> iterator() {
+        List<Map.Entry<K, V>> entries = new ArrayList<>();
+        inOrderTraversal(root, entries);
+        return entries;
+    }
+
+    private void inOrderTraversal(Node node, List<Map.Entry<K, V>> entries) {
+        if (node != null) {
+            inOrderTraversal(node.left, entries);
+            entries.add(new SimpleEntry<>(node.key, node.val));
+            inOrderTraversal(node.right, entries);
+        }
+
+
+    }
 }

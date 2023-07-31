@@ -1,3 +1,4 @@
+import java.util.Map;
 import java.util.function.BinaryOperator;
 
 public class Main {
@@ -15,5 +16,8 @@ public class Main {
         System.out.println("");
         treeSize=bst.size();
         System.out.println(treeSize);
+        for (Map.Entry<Integer, String> entry : bst) {
+            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
     }
 }

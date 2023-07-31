@@ -58,7 +58,7 @@ public class BST <K extends Comparable<K>, V>{
 
         int cmp = key.compareTo(current.key);
         if(cmp<0){
-            current.left=delete(current.left, key)
+            current.left=delete(current.left, key);
         } else if (cmp>0) {
             current.right=delete(current.right, key);
         }
@@ -86,7 +86,13 @@ public class BST <K extends Comparable<K>, V>{
         }
         return findMin(node.left);
     }
-
+    private Node deleteMin(Node node){
+        if(node.left==null){
+            return node.right;
+        }
+        node.left=deleteMin(node.left);
+        return node;
+    }
 
     public Iterable<K> iterator(){
         return null;

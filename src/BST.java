@@ -4,11 +4,13 @@ public class BST <K extends Comparable<K>, V>{
         private K key;
         private V val;
         private Node left,right;
+        private int size;
         public Node(K key, V val)
         {
             this.key=key;
             this.val=val;
             left=right=null;
+            this.size=1;
         }
     }
     public BST(){
@@ -33,7 +35,7 @@ public class BST <K extends Comparable<K>, V>{
         return current;
     }
     public void inOrder(){
-        inOrder(root);//что это означает?
+        inOrder(root);
     }
     private void inOrder(Node current) {
         if (current != null) {
@@ -45,9 +47,47 @@ public class BST <K extends Comparable<K>, V>{
     public V get(K key){
         return null;
     }
-    public void delete(K key){
-
+    public void delete(K key) {
+        root = delete(root, key);
     }
+
+    private Node delete(Node current, K key) {
+        if (current == null) {
+            return null;
+        }
+
+        int cmp = key.compareTo(current.key);
+        if(cmp<0){
+            current.left=delete(current.left, key)
+        } else if (cmp>0) {
+            current.right=delete(current.right, key);
+        }
+        else{
+            if(current.left==null && current.right==null){
+                return null;
+            }
+            if(current.left==null){
+                return current.right;
+            }
+            if(current.right==null){
+                return current.left;
+            }
+            Node minRight=findMin(current.right);
+            current.key=minRight.key;
+            current.val= minRight.val;
+            current.right=deleteMin(current.right);
+
+        }
+        return current;
+    }
+    private Node findMin(Node node){
+        if(node.left==null){
+            return node;
+        }
+        return findMin(node.left);
+    }
+
+
     public Iterable<K> iterator(){
         return null;
     }

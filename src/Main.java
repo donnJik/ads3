@@ -5,7 +5,10 @@ public class Main {
     public static void main(String[] args) {
         BST bst=new BST();
         bst.put(0,1);
-        bst.put(1,2);bst.put(2,3);bst.put(3,4);bst.put(4,5);
+        bst.put(1,2);
+        bst.put(2,3);
+        bst.put(3,4);
+        bst.put(4,5);
         bst.inOrder();
         System.out.println("");
         int treeSize= bst.size();
@@ -16,8 +19,9 @@ public class Main {
         System.out.println("");
         treeSize=bst.size();
         System.out.println(treeSize);
-        for (Map.Entry<Integer, String> entry : bst) {
-            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        BST<Integer,Integer>.Node foundNode = bst.find(3);
+        if(foundNode !=null){
+            System.out.println(foundNode.key+" "+ foundNode.val);
         }
     }
 }

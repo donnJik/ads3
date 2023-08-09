@@ -5,9 +5,15 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Iterator;
 public class BST <K extends Comparable<K>, V> implements Iterable<Map.Entry<K, V>> {
     private Node root;
-    private class Node{
-        private K key;
-        private V val;
+
+    @Override
+    public Iterator<Map.Entry<K, V>> iterator() {
+        return null;
+    }
+
+    public class Node{
+        public K key;
+        public V val;
         private Node left,right;
         private int size;
         public Node(K key, V val)
@@ -48,23 +54,6 @@ public class BST <K extends Comparable<K>, V> implements Iterable<Map.Entry<K, V
             inOrder(current.left);
             System.out.print(current.val + " ");
             inOrder(current.right);
-        }
-    }
-    public V get(K key) {
-        Node node = find(root, key);
-        return node != null ? node.val : null;
-    }
-
-    private Node find(Node current, K key) {
-        if (current == null || current.key.equals(key)) {
-            return current;
-        }
-
-        int cmp = key.compareTo(current.key);
-        if (cmp < 0) {
-            return find(current.left, key);
-        } else {
-            return find(current.right, key);
         }
     }
 
@@ -123,11 +112,7 @@ public class BST <K extends Comparable<K>, V> implements Iterable<Map.Entry<K, V
         return size(root);
     }
 
-    public Iterable<Map.Entry<K, V>> iterator() {
-        List<Map.Entry<K, V>> entries = new ArrayList<>();
-        inOrderTraversal(root, entries);
-        return entries;
-    }
+
 
     private void inOrderTraversal(Node node, List<Map.Entry<K, V>> entries) {
         if (node != null) {
@@ -135,7 +120,21 @@ public class BST <K extends Comparable<K>, V> implements Iterable<Map.Entry<K, V
             entries.add(new SimpleEntry<>(node.key, node.val));
             inOrderTraversal(node.right, entries);
         }
-
+    }
+    public Node find(K key){
+        return ffind(root, key);
+    }
+    private Node ffind(Node current, K key){
+        if(current==null || current.key.equals(key)){
+            return current;
+        }
+        int c= key.compareTo(current.key);
+        if(c<0){
+            return ffind(current.left, key);
+        }
+        else {
+            return ffind(current.right, key );
+        }
 
     }
 }
